@@ -9,31 +9,101 @@
 		.form-control{
 			width:250px;
 		}
-		.container{
-			max-width:300px;
-			height: auto
+		#form-container{
+			width:300px;
+			height: auto;
 			float:right;
 			margin-top: 50px;
 			margin-right: 30px;
 			border:1px solid #ccc;
 			box-shadow: 0 3px 3px #ccc;
+			text-align: center;
+		}
+		#todo-container-pending{
+			width:250px;
+			height: auto;
+			float: left;
+			margin-top: 50px;
+			margin-left: 50px;
+			border:1px solid #ccc;
+			background: #E3E3E3;
+			box-shadow: 0 3px 3px #ccc;
+			text-align: center;
+		}
+		#todo-container-inprogress{
+			width:250px;
+			height: auto;
+			float: left;
+			margin-top: 50px;
+			margin-left: 50px;
+			border:1px solid #ccc;
+			background: #E3E3E3;
+			box-shadow: 0 3px 3px #ccc;
+			text-align: center;
+		}
+		#todo-container-completed{
+			width:250px;
+			height: auto;
+			float: left;
+			margin-top: 50px;
+			margin-left: 50px;
+			border:1px solid #ccc;
+			background: #E3E3E3;
+			box-shadow: 0 3px 3px #ccc;
+			text-align: center;
+		}
+		.todo-list {
+			width: 230px;
+			height: auto;
+			margin-left: auto;
+			margin-right: auto;
+			background: #fff;
+			border:1px solid #ccc;
+			box-shadow: 0 3px 3px #ccc;
+			margin-bottom: 10px;
 		}
 		</style>
 	</head>
 <body>
-	<div class="container">
+	<div id="todo-container-pending">
+	<h4>Pending</h4>
+	</div>
+	<div id="todo-container-inprogress">
+	<h4>In Progress</h4>
+	</div>
+	<div id="todo-container-completed">
+	<h4>Completed</h4>
+	</div>
+	<div id="form-container" class="container">
 		<h4>Add To-Do list</h4>
 		<input type="text" id="title" class="form-control" placeholder="Title"><br>
 		<textarea type="text" id="desc" class="form-control" rows="6" cols="50" placeholder="Description"></textarea><br>
-		<input type="text" id="duedata" class="form-control" placeholder="Date"><br>
-		<button class="btn btn-primary btn-lg">Add List</button><br><br><br>
+		<input type="text" id="duedate" class="form-control" placeholder="Date"><br>
+		<button class="btn btn-primary btn-lg" id="add">Add List</button><br><br><br>
 	</div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="http://yourjavascript.com/9547124184/jquery-datetimepicker.js"></script>
 	<script type="text/javascript" 
 		src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript">
-	
+		$(document).ready(function(){
+			$("#add").click(function(){
+				var title = $("#title").val();
+				var desc = $("#desc").val();
+				var duedate = $("#duedate").val();
+				$("#todo-container-pending").append("<span style='font-size:14px !important;float:right; class='close'>X</span> <div class='todo-list' style='cursor: move;'> <h4 style='text-align:left;margin-left:5px;'> <span style='font-size:14px !important;float:right;margin-right:5px;'> " +duedate  + "</span> "+ title  + "</h4><p style='font-size:16px;text-align:left;margin-left:13px;word-break: break-all;margin-right: 10px;'> " + desc  + 
+					" </p></div>");
+			});
+		});
+		$(document).on("mouseover",function() {
+			$( ".todo-list" ).draggable({
+				revert:true
+			});
+		});
+		$(".close").click(function() {
+				$(".todo-list").remove();
+		});
 	</script>
 </body>
 </html>
