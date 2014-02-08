@@ -17,29 +17,28 @@
 			width: 300px;
 			min-height: 200px;
 			float: right;
-			margin-top: 30px;
+			margin-top: -485px;
 			margin-right: 20px;
 			border: 1px solid #ccc;
 			box-shadow: 0 3px 3px #ccc;
 			text-align: center;
 		}
 		#todo-container-pending{
-			width:250px;
-			min-height: 200px;
+			width:260px;
+			height: 400px;
 			float: left;
-			margin-top: 50px;
+			margin-top: 10px;
 			margin-left: 50px;
 			border:1px solid #ccc;
 			background: #E3E3E3;
 			box-shadow: 0 3px 3px #ccc;
 			text-align: center;
-
 		}
 		#todo-container-inprogress{
-			width:250px;
-			min-height: 200px;
+			width:260px;
+			height: 400px;
 			float: left;
-			margin-top: 50px;
+			margin-top: 10px;
 			margin-left: 50px;
 			border:1px solid #ccc;
 			background: #E3E3E3;
@@ -47,10 +46,10 @@
 			text-align: center;
 		}
 		#todo-container-completed{
-			width:250px;
-			min-height: 200px;
+			width:260px;
+			height: 400px;
 			float: left;
-			margin-top: 50px;
+			margin-top: 10px;
 			margin-left: 50px;
 			border:1px solid #ccc;
 			background: #E3E3E3;
@@ -77,7 +76,6 @@
 			margin-bottom: 13px;
 			left: 0px;
 			top: 0px;
-			
 		}
 		.close{
 			font-size:17px !important;
@@ -87,13 +85,15 @@
     		height:20px;
 		}
 		#main-container{
-			width: 75%;
+			width: 70%;
+			min-height: 450px;
+			margin-top: 50px;
 			border: 1px solid red;
-			height: 960px;
 		}
 		</style>
 	</head>
 <body>
+<div id="main-container">
 	<div id="todo-container-pending" class="ui-widget-header">
 	<h4>Pending</h4>
 	</div>
@@ -103,6 +103,8 @@
 	<div id="todo-container-completed" class="ui-widget-header">
 	<h4>Completed</h4>
 	</div>
+</div>
+<h3 style="margin-top:50px;margin-left:100px">Drag a list here to remove</h3>	
 	<div id="form-container" class="container">
 		<h4>Add To-Do list</h4>
 		<input type="text" id="title" class="form-control" placeholder="Title"><br>
@@ -146,7 +148,8 @@
 		});*/
 		$(document).on("mouseover",".todo-list",function(e) {
 			$(e.target).closest(".todo-list").draggable({
-				revert: "invalid", 
+				activeClass: "ui-state-highlight",
+				revert: "true", 
 				containment: "document",
 		});
 			$("#todo-container-inprogress").droppable({
@@ -155,6 +158,10 @@
 					$("#todo-container-inprogress").append(ui.draggable);
 					$(ui.draggable).css("left","inherit").css("top","inherit");
 				}
+			});
+			$("#main-container").mouseleave(function(e){
+            	var ele = $(e.target).closest(".todo-list");
+            	ele.remove();
 			});
 			$("#todo-container-completed").droppable({
 				accept:'.todo-list',
