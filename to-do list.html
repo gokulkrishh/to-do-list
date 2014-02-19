@@ -17,7 +17,7 @@
 			width: 300px;
 			min-height: 200px;
 			float: right;
-			margin-top: -485px;
+			margin-top: -528px;
 			margin-right: 20px;
 			border: 1px solid #ccc;
 			box-shadow: 0 3px 3px #ccc;
@@ -28,7 +28,7 @@
 			min-height: 400px;
 			float: left;
 			margin-top: 10px;
-			margin-left: 50px;
+			margin-left: 30px;
 			border:1px solid #ccc;
 			background: #E3E3E3;
 			box-shadow: 0 3px 3px #ccc;
@@ -69,7 +69,7 @@
 			height: auto;
 			margin-left: auto !important;
 			margin-right: auto !important;
-			background: #fff;
+			background: yellow;
 			border:1px solid #ccc;
 			cursor: move;
 			box-shadow: 0 3px 3px #ccc;
@@ -88,12 +88,15 @@
 			width: 70%;
 			min-height: 450px;
 			margin-top: 50px;
+			margin-left: 2%;
 			border: 1px solid red;
 			overflow-y: overlay;
+			overflow-x: hidden;
 		}
 		</style>
 	</head>
 <body>
+	<h1 align="center">To Do List</h1>
 <div id="main-container">
 	<div id="todo-container-pending" class="ui-widget-header">
 	<h4>Pending</h4>
@@ -124,6 +127,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
+			$( "#duedate" ).datepicker();
 			$("#add").click(function(){
 				var title = $("#title").val();
 				var desc = $("#desc").val();
@@ -134,9 +138,6 @@
 					" </p></div>");
 				}
 			});
-		$(function() {
-    		$( "#duedate" ).datepicker();
-  		});
 			$(document).on("click", ".remove", function (e) {
          		$(e.target).closest(".todo-list").remove();
      		});
